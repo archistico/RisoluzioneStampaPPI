@@ -155,7 +155,7 @@
         <p class="mb-1">&copy; 2017-2018 <a href="#">Studio Archistico</a></p>
     </footer>
 </div>
-
+<script src="js/app.js"></script>
 <script>
 
     (function() {
@@ -174,87 +174,26 @@
                     } else {
                         event.preventDefault();
                         event.stopPropagation();
-                        calcola();
+
+                        let LatoOri = Number(document.getElementById('latoOrizzontale').value);
+                        let LatoVer = Number(document.getElementById('latoVerticale').value);
+                        let Abbondanza = Number(document.getElementById('abbondanza').value);
+                        let DistanzaCm = Number(document.getElementById('distanza').value);
+                        let OpzioneAcuita = Number(document.getElementById('acuita').value);
+
+                        let risultati = calcola(DistanzaCm, LatoOri, LatoVer, Abbondanza, OpzioneAcuita);
+
+                        // Scrivi i risultati in tabella
+                        document.getElementById('ris_ppi').innerText = risultati['PPI'];
+                        document.getElementById('ris_distmin').innerText = risultati['DISTANZACONSIGLIATA'];
+                        document.getElementById('ris_pxhz').innerText = risultati['PIXELORIZZONTALI'];
+                        document.getElementById('ris_pxvt').innerText = risultati['PIXELVERTICALI'];
                     }
                     form.classList.add('was-validated');
                 }, false);
             });
         }, false);
     })();
-
-    function calcola() {
-        console.log("--- Sto calcolando ---");
-        let SecToRad = 0.000004848136811;
-        let DistanzaInch = 0;
-        let DistanzaCm = Number(document.getElementById('distanza').value);
-        let PPI = 0;
-        let LatoOri = Number(document.getElementById('latoOrizzontale').value);
-        let LatoVer = Number(document.getElementById('latoVerticale').value);
-        let Abbondanza = Number(document.getElementById('abbondanza').value);
-        let DistanzaConsigliata = 0;
-        let PixelOri = 0;
-        let PixelVer = 0;
-        let Acuita = 0;
-
-        switch (document.getElementById('acuita').value)
-        {
-            case "0":
-                Acuita = SecToRad * 30;
-                break;
-            case "1":
-                Acuita = SecToRad * 35;
-                break;
-            case "2":
-                Acuita = SecToRad * 40;
-                break;
-            case "3":
-                Acuita = SecToRad * 45;
-                break;
-            case "4":
-                Acuita = SecToRad * 50;
-                break;
-            case "5":
-                Acuita = SecToRad * 55;
-                break;
-            case "6":
-                Acuita = SecToRad * 60;
-                break;
-        }
-
-        DistanzaInch = DistanzaCm / 2.54;
-        console.log("Distanza [inch]: "+DistanzaInch);
-        console.log("Acuità: "+Acuita);
-        PPI = 1 / (2 * DistanzaInch * Math.tan(Acuita / 2));
-        console.log("PPI: "+PPI);
-
-        let LatoMaggiore = 0;
-        if (LatoOri >= LatoVer)
-            LatoMaggiore = LatoOri + 2 * Abbondanza;
-        else
-            LatoMaggiore = LatoVer + 2 * Abbondanza;
-
-        let angoloConoOtticoGra = 60;
-        let angoloConoOtticoRad = angoloConoOtticoGra * Math.PI / 180;
-
-        DistanzaConsigliata = LatoMaggiore * Math.cos(angoloConoOtticoRad / 2);
-        console.log("Distanza consigliata: "+DistanzaConsigliata);
-
-        if (PPI != 0)
-        {
-            PixelOri = LatoOri / 2.54 * PPI;
-            PixelVer = LatoVer / 2.54 * PPI;
-
-            console.log("Pixel larghezza: "+PixelOri);
-            console.log("Pixel altezza: "+PixelVer);
-        }
-
-        // Scrivi i risultati in tabella
-        document.getElementById('ris_ppi').innerText = PPI.toFixed(0);
-        document.getElementById('ris_distmin').innerText = DistanzaConsigliata.toFixed(0);
-        document.getElementById('ris_pxhz').innerText = PixelOri.toFixed(0);
-        document.getElementById('ris_pxvt').innerText = PixelVer.toFixed(0);
-    }
-
 
 </script>
 
