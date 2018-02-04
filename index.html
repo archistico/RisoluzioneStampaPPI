@@ -1,0 +1,231 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Calcolo risoluzione PPI</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/form-validation.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<div class="container">
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        <h2>Calcolo risoluzione PPI</h2>
+        <p class="lead">Il programma vi aiuta a trovare la risoluzione per una corretta visualizzazione di un qualunque supporto.</p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 order-md-2 mb-4">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">Informazioni</span>
+            </h4>
+            <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">Acuità visiva</h6>
+                        <small class="text-muted">L'acuità visiva o acutezza è il valore in gradi (secondi di grado) del dettaglio più piccolo riconoscibile ad occhio nudo. Normalmente una vista normale ha come valori di risoluzione 35-50 secondi d'arco.
+                            La distanza dell'osservatore dal supporto per cui dipende da due fattori: l'acuità e la distanza tra i due. Più l'acutezza è fine (30 secondi d'arco è il valore migliore) e la distanza è minima più vediamo dettagli per cui il DPI sale.
+                            L'età dell'osservatore condiziona il valore di distanza minima. Un bambino di 6 anni riesce a guardare anche ad una distanza minima di 6,5 cm mentre una persona adulta non riesce ad avvicinarsi oltre i 15,5 cm.</small>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">Dimensione supporto</h6>
+                        <small class="text-muted">Inserendo le dimensioni in cm del supporto che volete produrre/stampare potete ottenere la risoluzione in pixel che dovrà avere il file.
+                            L'abbondanza è quel valore che aumenta l'area creata e serve per la tipografia (misurato in questo caso sempre in cm). È una zona di sicurezza che permette al tipografo durante il taglio di evitare zone bianche date dalla tolleranza dei macchinari. Il valore può comunque essere posto a 0.</small>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">Calcolo risoluzione</h6>
+                        <small class="text-muted">Avendo inserito i valori del supporto, il programma prende la misura maggiore e calcola la distanza minima alla quale posizionarsi per vederlo interamente senza eccessive aberrazioni. Il valore dipende dal cono ottico (classico a 60°).
+                            I campi risoluzione orizzontale e verticale invece rappresentano la dimensione in pixel che dovrà avere la vostra immagine in base ai valori impostati. La risoluzione prende il valore di DPI iniziale per cui usa non la distanza minima dell'osservatore ma quella impostata inizialmente. Conviene per cui inserire nel campo "Distanza osservatore" il valore che ha calcolato il programma come distanza minima.</small>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-8 order-md-1">
+            <h4 class="mb-3">Dimensioni supporto</h4>
+            <form class="needs-validation" novalidate>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="latoOrizzontale">Lato orizzontale [cm]</label>
+                        <input type="number" class="form-control" id="latoOrizzontale" placeholder="" value="200" step="0.1" required>
+                        <div class="invalid-feedback">
+                            Si richiede un numero maggiore di zero
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="latoVerticale">Lato verticale [cm]</label>
+                        <input type="number" class="form-control" id="latoVerticale" placeholder="" value="300" step="0.1" required>
+                        <div class="invalid-feedback">
+                            Si richiede un numero maggiore di zero
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="abbondanza">Abbondanza [cm]</label>
+                        <input type="number" class="form-control" id="abbondanza" placeholder="" value="3" step="0.1" required>
+                        <div class="invalid-feedback">
+                            Si richiede un numero
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="mb-4">
+
+                <div class="row">
+                    <div class="col-md-8 mb-3">
+                        <label for="acuita">Acuità visiva</label>
+                        <select class="custom-select d-block w-100" id="acuita" required>
+                            <option value="">Scegli...</option>
+                            <option value="0" selected>30 secondi di arco</option>
+                            <option value="1">35 secondi di arco</option>
+                            <option value="2">40 secondi di arco</option>
+                            <option value="3">45 secondi di arco</option>
+                            <option value="4">50 secondi di arco</option>
+                            <option value="5">55 secondi di arco</option>
+                            <option value="6">1 minuti di arco</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Scegli un'opzione valida.
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="distanza">Distanza osservatore [cm]</label>
+                        <input type="number" class="form-control" id="distanza" placeholder="" value="250" step="0.1" required>
+                        <div class="invalid-feedback">
+                            Si richiede un numero
+                        </div>
+                    </div>
+                </div>
+
+
+                <hr class="mb-4">
+
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Calcola</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2017-2018 <a href="#">Studio Archistico</a></p>
+    </footer>
+</div>
+
+<script>
+
+    (function() {
+        'use strict';
+
+        window.addEventListener('load', function() {
+
+            var forms = document.getElementsByClassName('needs-validation');
+
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        console.log("Dati non validi");
+                    } else {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        calcola();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+
+    function calcola() {
+        console.log("Sto calcolando");
+        let SecToRad = 0.000004848136811;
+        let DistanzaInch = 0;
+        let DistanzaCm = document.getElementById('distanza').value;
+        let PPI = 0;
+        let LatoOri = document.getElementById('latoOrizzontale').value;
+        let LatoVer = document.getElementById('latoVerticale').value;
+        let Abbondanza = document.getElementById('abbondanza').value
+        let DistanzaConsigliata = 0;
+        let PixelOri = 0;
+        let PixelVer = 0;
+        let Bayer = 0;
+        let Acuita = 0;
+
+        switch (document.getElementById('acuita').value)
+        {
+            case "0":
+                Acuita = SecToRad * 30;
+                break;
+            case "1":
+                Acuita = SecToRad * 35;
+                break;
+            case "2":
+                Acuita = SecToRad * 40;
+                break;
+            case "3":
+                Acuita = SecToRad * 45;
+                break;
+            case "4":
+                Acuita = SecToRad * 50;
+                break;
+            case "5":
+                Acuita = SecToRad * 55;
+                break;
+            case "6":
+                Acuita = SecToRad * 60;
+                break;
+        }
+
+        DistanzaInch = DistanzaCm / 2.54;
+        console.log("Distanza [inch]: "+DistanzaInch);
+        console.log("Acuità: "+Acuita);
+        PPI = 1 / (2 * DistanzaInch * Math.tan(Acuita / 2));
+        console.log("PPI: "+PPI);
+
+        let LatoMaggiore = 0;
+        if (LatoOri >= LatoVer)
+            LatoMaggiore = LatoOri + 2 * Abbondanza;
+        else
+            LatoMaggiore = LatoVer + 2 * Abbondanza;
+
+        let angoloConoOtticoGra = 60;
+        let angoloConoOtticoRad = angoloConoOtticoGra * Math.PI / 180;
+
+        DistanzaConsigliata = LatoMaggiore * Math.cos(angoloConoOtticoRad / 2);
+        console.log(DistanzaConsigliata);
+
+        if (PPI != 0)
+        {
+            PixelOri = LatoOri / 2.54 * PPI;
+            PixelVer = LatoVer / 2.54 * PPI;
+
+            console.log(PixelOri);
+            console.log(PixelVer);
+        }
+    }
+
+
+</script>
+
+</body>
+</html>

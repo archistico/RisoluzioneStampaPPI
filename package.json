@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/archistico/RisoluzioneStampaPPI/issues"
   },
-  "homepage": "https://github.com/archistico/RisoluzioneStampaPPI#readme"
+  "homepage": "https://github.com/archistico/RisoluzioneStampaPPI#readme",
+  "dependencies": {
+    "bootstrap": "^4.0.0"
+  }
 }
