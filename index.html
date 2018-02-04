@@ -13,16 +13,13 @@
     <!-- Bootstrap core CSS -->
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="css/form-validation.css" rel="stylesheet">
 </head>
 
 <body class="bg-light">
 
 <div class="container">
     <div class="py-5 text-center">
-        <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-        <h2>Calcolo risoluzione PPI</h2>
+        <h1>Calcolo risoluzione immagine</h1>
         <p class="lead">Il programma vi aiuta a trovare la risoluzione per una corretta visualizzazione di un qualunque supporto.</p>
     </div>
 
@@ -36,7 +33,7 @@
                     <div>
                         <h6 class="my-0">Acuità visiva</h6>
                         <small class="text-muted">L'acuità visiva o acutezza è il valore in gradi (secondi di grado) del dettaglio più piccolo riconoscibile ad occhio nudo. Normalmente una vista normale ha come valori di risoluzione 35-50 secondi d'arco.
-                            La distanza dell'osservatore dal supporto per cui dipende da due fattori: l'acuità e la distanza tra i due. Più l'acutezza è fine (30 secondi d'arco è il valore migliore) e la distanza è minima più vediamo dettagli per cui il DPI sale.
+                            La distanza dell'osservatore dal supporto per cui dipende da due fattori: l'acuità e la distanza tra i due. Più l'acutezza è fine (30 secondi d'arco è il valore migliore) e la distanza è minima più vediamo dettagli per cui il PPI sale.
                             L'età dell'osservatore condiziona il valore di distanza minima. Un bambino di 6 anni riesce a guardare anche ad una distanza minima di 6,5 cm mentre una persona adulta non riesce ad avvicinarsi oltre i 15,5 cm.</small>
                     </div>
                 </li>
@@ -57,7 +54,7 @@
             </ul>
         </div>
         <div class="col-md-8 order-md-1">
-            <h4 class="mb-3">Dimensioni supporto</h4>
+            <h4 class="mb-3">Dimensioni supporto da stampare</h4>
             <form class="needs-validation" novalidate>
                 <div class="row">
                     <div class="col-md-4 mb-3">
@@ -82,9 +79,6 @@
                         </div>
                     </div>
                 </div>
-
-                <hr class="mb-4">
-
                 <div class="row">
                     <div class="col-md-8 mb-3">
                         <label for="acuita">Acuità visiva</label>
@@ -111,19 +105,51 @@
                     </div>
                 </div>
 
-
                 <hr class="mb-4">
-
-                <div class="row">
-                    <div class="col-md-12 mb-3">
-
-                    </div>
-                </div>
 
                 <button class="btn btn-primary btn-lg btn-block" type="submit">Calcola</button>
             </form>
+
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Risultato</th>
+                        <th scope="col">Unità di misura</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">PPI</th>
+                        <td><span id="ris_ppi"></span></td>
+                        <td>[pixel/inch]</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Distanza minima per visione intera</th>
+                        <td><span id="ris_distmin"></span></td>
+                        <td>[cm]</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Immagine pixel orizzontali</th>
+                        <td><span id="ris_pxhz"></span></td>
+                        <td>[pixel]</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Immagine pixel verticali</th>
+                        <td><span id="ris_pxvt"></span></td>
+                        <td>[pixel]</td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+
+
         </div>
     </div>
+
 
     <footer class="my-5 pt-5 text-muted text-center text-small">
         <p class="mb-1">&copy; 2017-2018 <a href="#">Studio Archistico</a></p>
@@ -157,18 +183,17 @@
     })();
 
     function calcola() {
-        console.log("Sto calcolando");
+        console.log("--- Sto calcolando ---");
         let SecToRad = 0.000004848136811;
         let DistanzaInch = 0;
-        let DistanzaCm = document.getElementById('distanza').value;
+        let DistanzaCm = Number(document.getElementById('distanza').value);
         let PPI = 0;
-        let LatoOri = document.getElementById('latoOrizzontale').value;
-        let LatoVer = document.getElementById('latoVerticale').value;
-        let Abbondanza = document.getElementById('abbondanza').value
+        let LatoOri = Number(document.getElementById('latoOrizzontale').value);
+        let LatoVer = Number(document.getElementById('latoVerticale').value);
+        let Abbondanza = Number(document.getElementById('abbondanza').value);
         let DistanzaConsigliata = 0;
         let PixelOri = 0;
         let PixelVer = 0;
-        let Bayer = 0;
         let Acuita = 0;
 
         switch (document.getElementById('acuita').value)
@@ -212,16 +237,22 @@
         let angoloConoOtticoRad = angoloConoOtticoGra * Math.PI / 180;
 
         DistanzaConsigliata = LatoMaggiore * Math.cos(angoloConoOtticoRad / 2);
-        console.log(DistanzaConsigliata);
+        console.log("Distanza consigliata: "+DistanzaConsigliata);
 
         if (PPI != 0)
         {
             PixelOri = LatoOri / 2.54 * PPI;
             PixelVer = LatoVer / 2.54 * PPI;
 
-            console.log(PixelOri);
-            console.log(PixelVer);
+            console.log("Pixel larghezza: "+PixelOri);
+            console.log("Pixel altezza: "+PixelVer);
         }
+
+        // Scrivi i risultati in tabella
+        document.getElementById('ris_ppi').innerText = PPI.toFixed(0);
+        document.getElementById('ris_distmin').innerText = DistanzaConsigliata.toFixed(0);
+        document.getElementById('ris_pxhz').innerText = PixelOri.toFixed(0);
+        document.getElementById('ris_pxvt').innerText = PixelVer.toFixed(0);
     }
 
 
