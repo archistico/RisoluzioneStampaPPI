@@ -18,5 +18,8 @@
   "homepage": "https://github.com/archistico/RisoluzioneStampaPPI#readme",
   "dependencies": {
     "bootstrap": "^4.0.0"
+  },
+  "devDependencies": {
+    "jest": "^22.1.4"
   }
 }
