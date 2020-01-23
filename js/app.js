@@ -49,8 +49,8 @@ function calcola(DistanzaCm, LatoOri, LatoVer, Abbondanza, OpzioneAcuita) {
 
     if (PPI != 0)
     {
-        PixelOri = LatoOri / 2.54 * PPI;
-        PixelVer = LatoVer / 2.54 * PPI;
+        PixelOri = (LatoOri + 2 * Abbondanza) / 2.54 * PPI;
+        PixelVer = (LatoVer + 2 * Abbondanza) / 2.54 * PPI;
     }
 
     return {
