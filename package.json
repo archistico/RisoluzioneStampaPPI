@@ -3,9 +3,6 @@
   "version": "0.0.1",
   "description": "Calcolo risoluzione in pixel in base alla distanza",
   "main": "index.js",
-  "scripts": {
-    "test": "jest"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/archistico/RisoluzioneStampaPPI.git"
@@ -18,8 +15,5 @@
   "homepage": "https://github.com/archistico/RisoluzioneStampaPPI#readme",
   "dependencies": {
     "bootstrap": "^4.4.1"
-  },
-  "devDependencies": {
-    "jest": "^22.1.4"
   }
 }
