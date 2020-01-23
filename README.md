@@ -4,4 +4,4 @@ Calcolo dei pixel in base alle dimensioni di stampa
 
 ## Install 
   
-  npm update
+Copy file to directory and open index.html with your browser
