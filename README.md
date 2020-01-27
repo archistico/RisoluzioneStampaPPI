@@ -1,3 +1,5 @@
+![Screenshot](https://raw.github.com/archistico/RisoluzioneStampaPPI/master/screenshots/screenshot1.png)
+
 # RisoluzioneStampaPPI  
   
 Calcolo dei pixel in base alle dimensioni di stampa
